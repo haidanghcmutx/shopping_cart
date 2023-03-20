@@ -1,0 +1,62 @@
+<header>
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+               <%= link_to "BookStore", root_path, aria: { current: request.path == root_path ? "page" : nil }%>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-lg-flex justify-content-lg-between" id="navbarSupportedContent">
+                <ul class="navbar-nav left mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <%= link_to "Home", root_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "Help", help_path, class: "nav-link", aria: { current: request.path == help_path ? "page" : nil }%>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "About", '#', class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
+                    </li>
+                    <% if user_signed_in? %>
+                        <li class="nav-item">
+                            <%= link_to "My Shop", showAll_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
+                        </li> 
+                    <% end %>
+                </ul>
+                
+                <div class="navbar-nav mb-2 mb-lg-0">
+                    <%= form_with url: category_path, method: :get, class:"d-flex align-items-center" do |f| %>
+                        <%= f.select :category, options_for_select([["All Category", 0]]+(Category.all.order(:name).map{ |c| [c.name, c.id] }), selected: 0), { include_hidden: false }, {class:"form-select me-2 m-auto"}%>
+                        <%= f.text_field :title, placeholder: "Enter Title...", class:"form-control me-2 m-auto"%>
+                        <%= f.submit "Search", class:'btn btn-primary m-auto w-50'%>
+                    <% end %>
+                </div>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <% if user_signed_in? %>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" id="dropdownMenuUser" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <strong> Welcome <%= current_user.name %> </strong>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuUser">
+                                    <li><%= button_to "Profile", edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
+                                    <li><%= button_to "My Cart", '#', class: "dropdown-item" %></li>
+                                    <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    <% else %>
+                        <li class="nav-item">
+                            <%= link_to "Log in", user_session_path, type:"button", class: 'nav-link log-in' %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Sign up", new_user_registration_path, type:"button", class: 'nav-link log-in' %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

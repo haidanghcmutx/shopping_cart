@@ -1,0 +1,395 @@
+
+@import "bootstrap";
+$gray-light: #777;
+$blue-color: #0b0ec9;
+$login-color: #0dfddc;
+$red-color: #e2381a;
+$gray-text: #797979;
+$gray-background: #f5f5f4;
+
+@mixin box-sizing {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -box-sizing: border-box;
+ }
+    /* miscellaneous */
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    @include box_sizing;
+}
+    
+// active
+.active {
+    text-decoration: none;
+    font-weight: bold;
+}
+/* universal */
+
+section {
+overflow: auto;
+}
+textarea {
+resize: vertical;
+}
+.center {
+ text-align: center;
+ background: url("book_store.jpg") no-repeat center/cover;
+ height: 600px;
+ margin: auto;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ h1 {
+    color: #04ffae;
+ }
+}
+
+.center h2 a {
+    text-decoration: none;
+    color: #b7fd0d;
+}
+/* typography */
+h2{
+    text-align: center;
+}
+//header
+header{
+    margin-bottom: 20px;
+    .navbar-brand {
+        margin-right: 10px;
+        font-size: 1.7em;
+        color: '0d6efd';
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        font-weight: bold;
+    } 
+    .left{
+        font-weight: bold;
+        color: $blue-color;
+    }
+    .navbar-brand {
+        font-size: 40px;
+    }
+    .dropdown {
+        a{
+            text-decoration: none; 
+        }
+        .dropdown-menu{
+            max-width: 100%;
+            right: 0;
+            left: auto;
+        }
+    }
+}
+
+
+//footer
+footer{
+    margin-top: 45px;
+    padding: 5px;
+    ul{
+        display: inline;
+        list-style: none;
+        float: right;
+        margin: auto;
+        li{
+            justify-content: center;
+            margin-left: 15px;
+            a{
+                text-align: center;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+// home
+.home{
+    #homecarouselExampleSlidesOnly{
+        .carousel-item {
+            max-height: 400px;
+            border-radius: 20px;
+        }
+    }
+    .home-content{
+        margin: 0 auto;
+        padding: 100px 40px;
+        .card{
+            .card-title:hover{
+                color: $red-color;
+            }
+            img:hover{
+                background-color: black;
+                opacity: 0.7;
+            }
+        }
+    }
+    .home-contact{
+        margin: 0 auto;
+        padding: 100px 40px;
+        background-color: $red-color;
+        .policy input{
+            width: auto;
+        }
+        h2, span{
+            color: white;
+        }
+        button{
+            margin-bottom: 15px;
+        }
+    }
+    .home-categories{
+        margin: 0 auto;
+        padding: 100px 100px;
+        background-color: $gray-background;
+        .card {
+            img{
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+                -webkit-transition: .3s ease-in-out;
+                transition: .3s ease-in-out;
+            }
+            img:hover{
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+    }   
+}
+
+// forms
+input, textarea, select, .uneditable-input{
+    border: 1px solid #bbb;
+    width: 100%;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    @include box_sizing;
+}
+input {
+    height: 41px;
+    border-radius: 10px;
+}
+form{
+    label{
+        font-weight: bold;
+    }
+    #error_explanation {
+        color: red;
+        ul {
+            color: red;
+            margin: 0 0 30px 0;
+        }
+    }
+    .field_with_errors {
+        @extend .has-error !optional;
+        .form-control {
+            color: red;
+        }
+    }
+}
+
+
+
+// --------------------- User ----------------------- //
+#login{
+    .modal-header{
+        text-align: center;
+    }
+    .modal-body{
+        margin: auto;
+        .checkbox{
+            font-weight: normal;
+            width: 100%;
+            input{
+                width: 20px;
+                margin-right: 5px;
+            }
+        }
+        .forget{
+            text-align: center;
+        }
+    } 
+}
+
+#new_user{
+    .checkbox{
+        font-weight: normal;
+        width: 100%;
+        input{
+            width: 20px;
+            margin-right: 5px;
+            height: auto;
+        }
+    }
+}
+.btn-primary {
+    color: #ff2b2b;
+    background-color: #00ff72;
+    border-color: #0c993e;
+    font-weight: bold;
+}
+.btn-primary:hover {
+    background-color: #04ffae;
+    color: white;
+    font-weight: bold;
+}
+a {
+    text-decoration: none;
+    color: #fd0d44;
+}   
+
+// edit user page
+.dropdown {
+    cursor: pointer;
+}
+.cancel-account{
+    padding-top: 20px;
+    text-align: center;
+    a{
+        float: right;
+        font-weight: bold;
+    }
+    .btn-danger {
+            color: #333;
+            background-color: transparent;
+            border-color: black;
+    }
+    .btn-danger:hover {
+            color: white;
+            background-color: #ff0404;
+    }
+}
+
+// ------------------- Shop -----------------------//
+// create shop
+#create-shop{
+    color: $blue-color;
+    .modal-header{
+        color: $blue-color;
+    }
+    label{
+        text-align: left;
+    }
+}
+
+/*  Book  */
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display{
+    padding-left: 20px;
+}
+
+.banner-shop{
+    background-color: #171717;
+    color: white;
+    padding: 40px;
+    h2:hover{
+        color: $red-color;
+    }
+}
+.book-detail{
+    color: $gray-text;
+    .author{
+        font-size: 20px;
+    }
+    .price{
+        color: $red-color;
+        font-size: 25px;
+    }
+    div{
+        line-height: 2;
+    }
+    span{
+        color: $gray-text;
+    }
+    .buynow{
+        input, button{
+            width: auto;
+            margin-bottom: 0px;
+        }
+    }
+}
+.related-book-in-shop{
+    margin: 0 auto;
+    padding: 100px 100px;
+    background-color: $gray-background;
+}
+/* Category */
+.category{
+    margin: 0 auto;
+    padding: 50px 100px;
+    background-color: $gray-background;
+    .blog-banner{
+        background-image: url('blog-bg.jpg');
+        background-size: cover;
+        text-align: center;
+        color: white;
+        padding: 100px 20px;
+    }
+    .sidebar{
+        background-color: white;
+        padding: 20px;
+        p{
+            color: #0d6efd;
+        }
+        a{
+            text-decoration: none;
+        }
+        p:hover{
+            color: $red-color;
+            font-weight: bold;
+        }
+    }
+    .content > p {
+        color: $gray-text;
+    }
+    .pagination{
+        float: right;
+    }
+    span{
+        padding: 2px;
+
+    }
+}
+.discount-banner{
+    background-color: $red-color;
+    padding: 100px 50px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p{
+        margin-right: 10px;
+    }
+    button{
+        margin-left: 10px;
+    }
+}
+.search-result{
+    margin: 0 auto;
+    padding: 40px 100px;
+    h3{
+        text-align: center;
+    }
+    .pagination{
+        float: right;
+    }
+    span{
+        padding: 2px;
+
+    }
+}
+
+
+.card{
+    .card-title:hover{
+        color: $red-color;
+    }
+    img:hover{
+        background-color: black;
+        opacity: 0.7;
+    }
+}

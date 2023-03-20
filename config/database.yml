@@ -1,0 +1,25 @@
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem "sqlite3"
+#
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DATABASE_USER", "root") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
+  host: <%= ENV.fetch("DATABASE_HOST", "db") %>
+
+development:
+  <<: *default
+  database: shopping_cart_development
+test:
+  <<: *default
+  database: shopping_cart_test
+production:
+  <<: *default
+  database: shopping_cart_production
+  username: shopping_cart
+  password: <%= ENV["DATABASE_PASSWORD"] %>
