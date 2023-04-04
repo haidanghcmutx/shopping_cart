@@ -13,10 +13,10 @@
                         <%= link_to "Home", root_path, class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
-                        <%= link_to "Help", help_path, class: "nav-link", aria: { current: request.path == help_path ? "page" : nil }%>
+                        <%= link_to "Category", category_path, class: "nav-link", aria: { current: request.path == category_path ? "page" : nil }%>
                     </li>
                     <li class="nav-item">
-                        <%= link_to "About", '#', class: "nav-link", aria: { current: request.path == root_path ? "page" : nil }%>
+                        <%= link_to "Help", help_path, class: "nav-link", aria: { current: request.path == help_path ? "page" : nil }%>
                     </li>
                     <% if user_signed_in? %>
                         <li class="nav-item">
@@ -41,7 +41,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuUser">
                                     <li><%= button_to "Profile", edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
-                                    <li><%= button_to "My Cart", '#', class: "dropdown-item" %></li>
+                                    <li><%= button_to "My Cart", carts_path, method: :get, class: "dropdown-item" %></li>
                                     <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
                                 </ul>
                             </div>

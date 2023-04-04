@@ -1,15 +1,24 @@
 class BooksController < ApplicationController
-    class BooksController < ApplicationController
-        before_action :current_shop,only: %i[edit create update destroy]
+        before_action :current_shop,only: %i[edit create update destroy index]
+        before_action :authenticate_user!, only: %i[edit create destroy update]
         def new; end
         
         def show
           @book = Book.find(params[:id])
-          @shop = Shop.find(@book.shop_id)
+          puts params[:id]
+          @shop = Shop.find(@book.shop_id) 
+          @cart_detail = CartDetail.new
           @categories = []
           @book.categories.each do |category|
             @categories.push category.name
           end
+        end
+
+        def index
+          @categories = Category.all.order(:name)
+          @books = @current_shop.books
+          @books = @books.where('title LIKE ?', "%#{params[:title]}%") if params[:title].present? && (params[:title] != '')
+          @books = @books.order(:title).page(params[:page]).per(12)
         end
       
         def edit
@@ -48,12 +57,12 @@ class BooksController < ApplicationController
         private
       
         def book_params
-          params.require(:book).permit(:title, :author, :publisher, :price, :year, :amount, :descrition, :img_url,
+          params.require(:book).permit(:title, :author, :publisher, :price, :year, :amount, :description, :img_url,
                                        category_ids: [])
         end
       
         def current_shop
           @current_shop = Shop.find(params[:shop_id])
         end
-      end
+      
 end

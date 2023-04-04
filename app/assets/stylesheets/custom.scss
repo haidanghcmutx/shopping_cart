@@ -1,4 +1,5 @@
-
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css");
+@import url("https://unpkg.com/select2@4.1.0-rc.0/dist/css/select2.min.css");
 @import "bootstrap";
 $gray-light: #777;
 $blue-color: #0b0ec9;
@@ -295,6 +296,11 @@ a {
     .author{
         font-size: 20px;
     }
+    .col-md-4{
+        img {
+            width: 100%;
+        }
+    }
     .price{
         color: $red-color;
         font-size: 25px;
@@ -353,6 +359,9 @@ a {
         padding: 2px;
 
     }
+    .card-title {
+        cursor: pointer;
+    }
 }
 .discount-banner{
     background-color: $red-color;
@@ -392,4 +401,180 @@ a {
         background-color: black;
         opacity: 0.7;
     }
+}
+
+// Cart
+.cart{
+    margin: 0 auto;
+    padding: 50px 100px;
+    background-color: $gray-background;
+    .cart-table{
+        table{
+            .table-header{
+                background-color: white;
+            }
+            thead{
+                th{
+                    padding: 20px 10px;
+                }
+            }
+            tbody{
+                .title, .sub-total{
+                    font-weight: bold;
+                }
+                .price{
+                    color: $gray-text;
+                }
+                .quantity{
+                    input{
+                        width: 20%;
+                        text-align: center;
+                    }
+                }
+                .sub-total{
+                    color: $red;
+                }
+                img{
+                    max-width: 100px;
+                    padding-right: 10px;
+                }
+                .title{
+                    a{
+                        text-decoration: none;
+                        color: black
+                    }
+                    a:hover{
+                        color: $red-color;
+                    }
+                }
+    
+                tr:last-child{
+                    height: 100px;
+                    .cart-coupon-inner{
+                        input{
+                            margin-bottom: 0;
+                        }
+                    }
+                    .actions{
+                        text-align: right;
+                    }
+                }
+            }   
+        }
+    }
+    
+    .cart-totals{
+        margin-top: 50px;
+        width: 48%;
+        float: right;
+        table{
+            tr{        
+                td{
+                    padding: 20px;
+                }        
+                td:last-child{
+                    background-color: white;
+                    
+                }
+            }
+            
+        }
+        .proceed-to-checkout{
+            button{
+                border-radius: 0;
+            }
+        }
+        
+    }
+}
+.order{
+    margin: 0 auto;
+    padding: 50px 100px;
+    background-color: $gray-background;
+    .order-review{
+        background-color: white;
+    
+        table{
+            font-weight: bold;
+            font-size: large;
+            width: 90%;
+            tbody{
+                margin: 20px;  
+            }
+            tr{
+                // height: 50px;
+                td{
+                    padding: 20px;
+                }
+            }
+            tr.item{
+                font-size: normal;
+                color: $blue-color;
+                font-weight: normal;
+                border-bottom: 1px solid $gray-text;
+            }
+            tr:last-child{
+                border-top: 1px solid $gray-text;
+                color: $red-color;
+            }
+        }
+    }
+
+    .payment{
+        background-color: white;
+        padding: 20px;
+        input{
+            height: 100%;
+            width: 20px;
+        }
+        input#shipping_address{
+            width: 100%;
+        }
+        label{
+            font-size: large;
+            font-weight: bold;
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            border-bottom: 1px solid $gray-text;
+            padding: 10px;
+        }
+        li:last-child{
+            border-bottom: none;
+            padding-top: 20px;
+            button{
+                border-radius: 0;
+            }
+        }
+    }
+}
+//bill
+.bill{
+    margin: 0 auto;
+    padding: 50px 0px;
+    background-color: $gray-background;
+    .bill-content{
+        .notice {
+            padding-bottom: 20px;
+            color: $gray-text;
+        }
+        .bill-detail{
+            background-color: white;
+            padding: 10px 20px;
+            label{
+                width:100%;
+                padding-bottom: 10px;
+                color: $gray-text;
+                text-transform: uppercase;
+            }
+            .col-md-2{
+                border-right: 1px solid $gray-text;
+            }
+        }
+    }
+}
+.alert{
+    margin-bottom: 0;
 }

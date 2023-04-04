@@ -6,10 +6,12 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
  
   protected
+  def current_cart
+    @current_cart ||= Cart.find_or_create_by(user_id: current_user.id)
+  end
  
   def configure_permitted_parameters
-    added_attrs = [:email, :password, :password_confirmation]
-    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[name email password password_confirmation current_password])
+    devise_parameter_sanitizer.permit( :sign_up, keys: %i[email name phone address password password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name email phone address password password_confirmation current_password])
   end
 end

@@ -13,7 +13,7 @@
                     <% end %>
                 </div>
             </div>
-            <div class="carousel-item" data-bs-interval="5000">
+            <div class="carousel-item" data-bs-interval="4000">
                 <%= image_tag asset_path('bg2.jpg'), class: "d-block w-100", alt: "Bookstore Background" %>
                 <div class="carousel-caption d-md-block">
                     <h1>Welcome to Bookstore</h1>
@@ -25,7 +25,7 @@
                     <% end %>
                 </div>
             </div>
-            <div class="carousel-item" data-bs-interval="5000">
+            <div class="carousel-item" data-bs-interval="4000">
                 <%= image_tag asset_path('bg3.jpg'), class: "d-block w-100", alt: "Bookstore Background" %>
                 <div class="carousel-caption d-md-block">
                     <h1>Welcome to Bookstore</h1>
@@ -51,7 +51,7 @@
                             <div class="card-body text-center">
                                 <h6 class="card-title"><%=book.title%></h6>
                                 <p class="card-text"><small class="text-muted"><%=book.author%></small></p>
-                                <p class="card-text text-danger"><b>Price: </b>$ <%=book.price%>.00 </p>
+                                <p class="card-text text-danger"><b>Price: </b> <%=number_to_currency book.price%></p>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%=item.name%></h5>
                                 <div class="d-flex">
-                                    <%= link_to "Shop Now!", category_path(category_id: item.id), class:"btn btn-outline-secondary btn-sm ms-auto" %>
+                                    <%= link_to "Shop Now!", category_path(category: item.id), class:"btn btn-outline-secondary btn-sm ms-auto" %>
                                     <%# <button class="btn btn-outline-secondary btn-sm ms-auto">Shop Now!</button> %>
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 class Shop < ApplicationRecord
   belongs_to :user
   has_many :books, dependent: :destroy
+  has_many :order_details, dependent: :destroy
   validates :user_id, presence: true
   validates :name, presence: true
   VALID_PHONE_REGEX = /0[0-9]*/
