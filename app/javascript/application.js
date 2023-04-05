@@ -1,9 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false 
+import "jquery"
+import "jquery_ujs"
 import "popper"
 import "bootstrap"
-import 'jquery'
-import 'jquery_ujs'
 import "select2"
 
 $(document).on("turbo:load", () => {
@@ -14,29 +15,28 @@ $(document).on("turbo:load", () => {
   });
   $(".multiselect-modal").on('select2:opening select2:closing', function( event ) {
     var $searchfield = $( '#'+event.target.id).parent().find('.select2-search__field');
-    // $searchfield.prop('disabled', true);
     $searchfield.css('display', 'none');
-    // $searchfield.attr('inputmode','none')
     console.log("finding search term...",$searchfield);
   });
   $(".js-example-basic-multiple").select2({
-    // theme: "bootstrap4",
-    // placeholder: "Choose book's category",
     width: '100%',
   });
   $(".js-example-basic-multiple").on('select2:opening select2:closing', function( event ) {
     var $searchfield = $( '#'+event.target.id).parent().find('.select2-search__field');
-    // $searchfield.prop('disabled', true);
     $searchfield.css('display', 'none');
-    // $searchfield.attr('inputmode','none')
     console.log("finding search term...",$searchfield);
   });
+
+  // increase quantity in cart
   $('.cart-table td.quantity .increase').on('click', function(){
-    var currentRow = $(this).parent().parent();
-    var value = parseInt($(this).prev().val()) + 1;
-    var sub_total = currencyToFloat($(currentRow).children('.price').text()) * value;
-    $(this).prev().val(value);
-    $(currentRow).children('.sub-total').text(toCurrency(sub_total));
+    var $currentRow = $(this).parent().parent();
+    var value = parseInt($(this).next().val()) + 1;
+    var sub_total = currencyToFloat($currentRow.children('.price').text()) * value;
+
+    $('.cart-table > table > tbody td.actions button').prop({'disabled': false});
+    $(this).next().val(value);
+    $currentRow.children('.sub-total').text(toCurrency(sub_total));
+    $currentRow.addClass('updated');
 
     calculateSubTotal();
 
@@ -44,19 +44,20 @@ $(document).on("turbo:load", () => {
   
   // decrease quantity in cart
   $('.cart-table td.quantity .decrease').on('click', function(){
-    if(parseInt($(this).next().val()) > 1){
+    if(parseInt($(this).prev().val()) > 1){
       var $currentRow = $(this).parent().parent();
-      var value = parseInt($(this).next().val()) - 1;
+      var value = parseInt($(this).prev().val()) - 1;
       var sub_total = currencyToFloat($currentRow.children('.price').text()) * value;
+
       $('.cart-table > table > tbody td.actions button').prop({'disabled': false});
-      $(this).next().val(value);
+      $(this).prev().val(value);
       $currentRow.children('.sub-total').text(toCurrency(sub_total));
       $currentRow.addClass('updated');
-
+      
       calculateSubTotal();
     }
     else {
-      alert("Quantity can't be less than 1!");
+      alert("Quantity can't be less than 1!")
     }
   });
 
@@ -70,7 +71,7 @@ $(document).on("turbo:load", () => {
         url: url,
         method: 'DELETE',
         success: function(response) {
-
+          
         },
         error: function(response) {
           alert('Can not delete!');
@@ -78,6 +79,8 @@ $(document).on("turbo:load", () => {
       });
     } 
   });
+
+  // click on button Update Cart
   $('.cart .cart-table table tbody tr td.actions button').on('click', function(){
     $('.cart .cart-table table tbody tr.updated').each(function(){
       var id = $(this).data('id');
@@ -129,8 +132,7 @@ $(document).on("turbo:load", () => {
     else
       $('.order .payment .place-order button').prop('disabled', true);
   });
-
-
+  
   // click on place order 
   $('.order .payment .place-order button').on('click', function(){
     var data = {};
@@ -146,7 +148,7 @@ $(document).on("turbo:load", () => {
         success: function(response){
             // delete all cart-details in order
           deleteCartDetails();
-
+           
         },
         error: function(jqXHR, textStatus, errorThrown){
           alert("Faile to update!")
@@ -163,6 +165,12 @@ $(document).on("turbo:load", () => {
     $(this).closest('tr').remove();
     alert('Processing order!')
   })
+
+  // // click on shops tab
+  // $('.shop-tabs .nav-tabs .nav-item a').on('click', function(){
+  //   $('.shop-tabs .nav-tabs .nav-item a.active').removeProp('aria-current').removeClass('active');
+  //   $(this).addClass('active');
+  // });
 });
 
 function toCurrency(currency){
@@ -186,6 +194,7 @@ function calculateSubTotal(){
     total += currencyToFloat($(this).find('td.sub-total').text());
   });
   
+  // update subtotal and total
   $subTotal.text(toCurrency(total));
   $total.text(toCurrency(total - currencyToFloat($discount.text())));
   if($checkedRows.length) 
@@ -200,9 +209,8 @@ function deleteCartDetails(){
       url: `/cart_details/${id}`,
       method: 'DELETE',
       success: function(result) {
-
+        
       }
     })
   });
 }
-

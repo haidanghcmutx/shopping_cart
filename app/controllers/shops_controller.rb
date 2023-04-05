@@ -1,7 +1,6 @@
 require 'kaminari'
 class ShopsController < ApplicationController
-  before_action :authenticate_user! 
-
+  before_action :authenticate_user!
   def new
     @shop = current_user.shops.build
   end
@@ -18,7 +17,7 @@ class ShopsController < ApplicationController
   end
 
   def edit
-    @shop = Shop.find(params[:id])
+    @shop = current_user.shops.find(params[:id])
   end
 
   def update
@@ -39,15 +38,15 @@ class ShopsController < ApplicationController
     @book = @shop.books.build
     @category = Category.all.order(:name)
   end
-  
+
   def order
     @shop = current_user.shops.find(params[:shop_id])
-    @orders = @shop.order_details.where(status: false).order(:created_at).page(params[:page]).per(20)
+    @orders = @shop.order_details.where(status: false).order(:created_at).page(params[:page])
   end
 
   def bill
     @shop = current_user.shops.find(params[:shop_id])
-    @bills = @shop.order_details.where(status: true).order(created_at: :desc).page(params[:page]).per(20)
+    @bills = @shop.order_details.where(status: true).order(created_at: :desc).page(params[:page])
   end
 
   def showAll; end
@@ -63,7 +62,6 @@ class ShopsController < ApplicationController
     flash[:notice] = 'Deleted successfully!'
     redirect_to showAll_path
   end
-  
 
   private
 

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'order_detail/create'
   get 'order/show'
   get 'shops/new'
+  get 'carts/show'
   get 'shops/edit'
   get 'showAll', to: 'shops#shops'
   get 'search', to: 'static_pages#search'

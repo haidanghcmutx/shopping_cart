@@ -1,3 +1,4 @@
+<% provide(:title, 'Checkout')%>
 <div class="banner-shop">
     <h2>Checkout</h2>
 </div>
@@ -48,7 +49,6 @@
                     </li>
                     <li class="payment-by-paypal">
                         <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal">
-
                         <label for="payment_method_paypal">
                             PayPal <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" alt="PayPal acceptance mark" width="100px"><a href="https://www.paypal.com/us/webapps/mpp/paypal-popup" class="about_paypal" onclick="javascript:window.open('https://www.paypal.com/us/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"> What is PayPal?</a>	</label>
                             <div class="payment_box payment_method_paypal">
@@ -63,6 +63,7 @@
                         <input id="shipping_address" type="text" name="shipping_address" value="" height="50px">
                     </li>
                     <li class="place-order">
+                        <%# <button class="btn btn-dark btn-lg">Place Order</button> %>
                         <%=button_to 'Place Order', order_export_bill_path(@order), class: 'btn btn-dark btn-lg', data: {id: @order.id}, disabled: true, method: :get%>
                     </li>
                 </ul>
